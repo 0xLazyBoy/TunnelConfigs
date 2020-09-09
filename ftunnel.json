@@ -1,0 +1,104 @@
+{
+  "dns": {
+    "servers": [
+      "1.1.1.1"
+    ]
+  },
+  "inbounds": [
+    {
+      "port": 30002,
+      "listen": "127.0.0.1",
+      "protocol": "socks",
+      "settings": {
+        "userLevel": 8
+      },
+      "tag": "http"
+    }
+  ],
+  "log": {
+    "loglevel": "none"
+  },
+  "outbounds": [
+    {
+      "mux": {
+        "enabled": false
+      },
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "xey.wrxjys.tech",
+            "port": 443,
+            "users": [
+              {
+                "alterId": 64,
+                "id": "3b5e258e-8c5e-45d3-b7d2-02c8f5fc0bb2",
+                "level": 8,
+                "security": "auto"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlssettings": {
+          "allowInsecure": true,
+          "alpn": [
+            "http\\2"
+          ],
+          "serverName": "xey.wrxjys.tech"
+        },
+        "wssettings": {
+          "connectionReuse": true,
+          "headers": {
+            "Host": "xey.wrxjys.tech",
+            "User-Agent": "Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0"
+          },
+          "path": "/"
+        }
+      },
+      "tag": "proxy"
+    },
+    {
+      "protocol": "freedom",
+      "settings": {
+        
+      },
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      },
+      "tag": "block"
+    }
+  ],
+  "policy": {
+    "levels": {
+      "8": {
+        "connIdle": 300,
+        "downlinkOnly": 1,
+        "handshake": 4,
+        "uplinkOnly": 1
+      }
+    },
+    "system": {
+      "statsInboundUplink": false,
+      "statsInboundDownlink": false
+    }
+  },
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      
+    ]
+  },
+  "stats": {
+    
+  }
+}
